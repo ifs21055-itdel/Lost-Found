@@ -179,13 +179,13 @@ class MainActivity : AppCompatActivity() {
                                 if (isChecked) {
                                     Toast.makeText(
                                         this@MainActivity,
-                                        "Gagal menyelesaikan todo: " + todo.title,
+                                        "Berhasil menyelesaikan todo: " + todo.title,
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 } else {
                                     Toast.makeText(
                                         this@MainActivity,
-                                        "Gagal batal menyelesaikan todo: " + todo.title,
+                                        "Berhasil batal menyelesaikan todo: " + todo.title,
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
