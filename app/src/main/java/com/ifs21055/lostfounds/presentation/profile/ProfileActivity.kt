@@ -6,19 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
-import com.ifs18005.delcomtodo.data.remote.response.DataUserResponse
-import com.ifs21055.lostfounds.R
 import com.ifs21055.lostfounds.data.remote.MyResult
-import com.ifs21055.lostfounds.data.repository.AuthRepository
-import com.ifs21055.lostfounds.data.repository.UserRepository
-import com.ifs21055.lostfounds.databinding.ActivityProfileBinding
+import com.ifs21055.lostfounds.data.remote.response.DataUserResponse
 import com.ifs21055.lostfounds.presentation.ViewModelFactory
 import com.ifs21055.lostfounds.presentation.login.LoginActivity
+import com.ifs21055.lostfounds.R
+import com.ifs21055.lostfounds.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding

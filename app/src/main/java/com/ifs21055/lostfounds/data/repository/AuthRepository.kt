@@ -1,10 +1,10 @@
 package com.ifs21055.lostfounds.data.repository
 
 import com.google.gson.Gson
-import com.ifs18005.delcomtodo.data.remote.response.DelcomResponse
 import com.ifs21055.lostfounds.data.pref.UserModel
 import com.ifs21055.lostfounds.data.pref.UserPreference
 import com.ifs21055.lostfounds.data.remote.MyResult
+import com.ifs21055.lostfounds.data.remote.response.DelcomLoginResponse
 import com.ifs21055.lostfounds.data.remote.retrofit.IApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -30,16 +30,14 @@ class AuthRepository private constructor(
     fun register(name: String, email: String, password: String) = flow {
         emit(MyResult.Loading)
         try {
-            //get success message
+            // get success message
             emit(MyResult.Success(apiService.register(name, email, password)))
         } catch (e: HttpException) {
-            //get error message
+            // get error message
             val jsonInString = e.response()?.errorBody()?.string()
             emit(
                 MyResult.Error(
-                    Gson()
-                        .fromJson(jsonInString, DelcomResponse::class.java)
-                        .message
+                    Gson().fromJson(jsonInString, DelcomLoginResponse::class.java).message
                 )
             )
         }
@@ -48,16 +46,14 @@ class AuthRepository private constructor(
     fun login(email: String, password: String) = flow {
         emit(MyResult.Loading)
         try {
-            //get success message
+            // get success message
             emit(MyResult.Success(apiService.login(email, password).data))
         } catch (e: HttpException) {
-            //get error message
+            // get error message
             val jsonInString = e.response()?.errorBody()?.string()
             emit(
                 MyResult.Error(
-                    Gson()
-                        .fromJson(jsonInString, DelcomResponse::class.java)
-                        .message
+                    Gson().fromJson(jsonInString, DelcomLoginResponse::class.java).message
                 )
             )
         }
@@ -71,10 +67,7 @@ class AuthRepository private constructor(
             apiService: IApiService,
         ): AuthRepository {
             synchronized(AuthRepository::class.java) {
-                INSTANCE = AuthRepository(
-                    userPreference,
-                    apiService
-                )
+                INSTANCE = AuthRepository(userPreference, apiService)
             }
             return INSTANCE as AuthRepository
         }

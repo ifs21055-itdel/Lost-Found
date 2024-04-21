@@ -8,12 +8,21 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/lost"
+        android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/lost"
+        android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LostFounds"
+        android:theme="@style/Theme.LostAndFound"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.lostfound.LostFoundFavoriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.lostfound.LostFoundManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.lostfound.LostFoundDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.profile.ProfileActivity"
             android:exported="false" />
@@ -23,13 +32,6 @@
         <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="false" />
-        <activity
-            android:name=".presentation.lostfound.LostFoundDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.lostfound.LostFoundManageActivity"
-            android:exported="false" />
-
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true">

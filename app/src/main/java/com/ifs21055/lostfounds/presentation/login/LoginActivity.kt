@@ -7,12 +7,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.ifs21055.lostfounds.presentation.main.MainActivity
 import com.ifs21055.lostfounds.data.pref.UserModel
 import com.ifs21055.lostfounds.data.remote.MyResult
-import com.ifs21055.lostfounds.databinding.ActivityLoginBinding
 import com.ifs21055.lostfounds.presentation.ViewModelFactory
-import com.ifs21055.lostfounds.presentation.main.MainActivity
 import com.ifs21055.lostfounds.presentation.register.RegisterActivity
+import com.ifs21055.lostfounds.databinding.ActivityLoginBinding
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {

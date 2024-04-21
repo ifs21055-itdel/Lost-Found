@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ifs18005.delcomtodo.data.remote.response.LostFoundsItemResponse
+import com.ifs21055.lostfounds.data.remote.response.LostFoundsItemResponse
 import com.ifs21055.lostfounds.databinding.ItemRowLostfoundBinding
 
 class LostFoundsAdapter :
-    ListAdapter<LostFoundsItemResponse,
-            LostFoundsAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<LostFoundsItemResponse, LostFoundsAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
     private var originalData = mutableListOf<LostFoundsItemResponse>()
@@ -60,15 +59,14 @@ class LostFoundsAdapter :
             binding.apply {
                 tvItemLostFoundTitle.text = data.title
                 cbItemLostFoundIsFinished.isChecked = data.isCompleted == 1
+
                 val statusText = if (data.status.equals("found", ignoreCase = true)) {
-                    // Jika status "found", maka gunakan warna hijau
                     highlightText("Found", Color.GREEN)
                 } else {
-                    // Jika status "lost", maka gunakan warna kuning
-                    highlightText("Lost", Color.YELLOW)
+                    highlightText("Lost", Color.RED)
                 }
                 // Menetapkan teks status yang sudah disorot ke TextView
-                tvStatus.text = statusText
+                tvLostFoundDetailStatus.text = statusText
             }
         }
 
@@ -100,8 +98,8 @@ class LostFoundsAdapter :
     }
 
     interface OnItemClickCallback {
-        fun onCheckedChangeListener(todo: LostFoundsItemResponse, isChecked: Boolean)
-        fun onClickDetailListener(todoId: Int)
+        fun onCheckedChangeListener(lostfound: LostFoundsItemResponse, isChecked: Boolean)
+        fun onClickDetailListener(lostfoundId: Int)
     }
 
     companion object {

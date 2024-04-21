@@ -1,15 +1,15 @@
 package com.ifs21055.lostfounds.presentation.register
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.ifs21055.lostfounds.data.remote.MyResult
-import com.ifs21055.lostfounds.databinding.ActivityRegisterBinding
 import com.ifs21055.lostfounds.presentation.ViewModelFactory
 import com.ifs21055.lostfounds.presentation.login.LoginActivity
+import com.ifs21055.lostfounds.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
