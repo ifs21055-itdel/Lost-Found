@@ -7,12 +7,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.ifs21055.lostfounds.R
 import com.ifs21055.lostfounds.data.remote.MyResult
 import com.ifs21055.lostfounds.data.remote.response.DataUserResponse
+import com.ifs21055.lostfounds.databinding.ActivityProfileBinding
 import com.ifs21055.lostfounds.presentation.ViewModelFactory
 import com.ifs21055.lostfounds.presentation.login.LoginActivity
-import com.ifs21055.lostfounds.R
-import com.ifs21055.lostfounds.databinding.ActivityProfileBinding
+
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
@@ -38,6 +39,9 @@ class ProfileActivity : AppCompatActivity() {
         binding.apply {
             ivProfileBack.setOnClickListener {
                 finish()
+            }
+            btnEditProfile.setOnClickListener {
+                startActivity(Intent(this@ProfileActivity, ProfileManageActivity::class.java))
             }
         }
     }
@@ -75,13 +79,15 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun loadProfileData(profile: DataUserResponse){
         binding.apply {
-
             if(profile.user.photo != null){
-                val urlImg = "https://public-api.delcom.org/${profile.user.photo}"
+                ivProfile.visibility = View.VISIBLE
+
                 Glide.with(this@ProfileActivity)
-                    .load(urlImg)
+                    .load("https://public-api.delcom.org/" + profile.user.photo)
                     .placeholder(R.drawable.ic_person)
                     .into(ivProfile)
+            }else{
+                ivProfile.visibility = View.GONE
             }
 
             tvProfileName.text = profile.user.name
