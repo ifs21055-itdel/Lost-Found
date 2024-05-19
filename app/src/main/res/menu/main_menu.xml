@@ -15,4 +15,14 @@
             android:title="Favorite LostFounds"
             app:showAsAction="never" />
     </group>
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/filter"
+        android:title="Item"
+        android:id="@+id/modal"
+        app:tint="@color/white"
+        app:showAsAction="ifRoom"
+        />
+
 </menu>

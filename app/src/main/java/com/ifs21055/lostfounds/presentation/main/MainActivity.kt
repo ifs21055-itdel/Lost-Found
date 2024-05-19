@@ -8,6 +8,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             ContextCompat
                 .getDrawable(this, R.drawable.ic_more_vert_24)
 
-        observeGetLostFounds()
+        observeGetLostFounds(null, null, null)
     }
 
     private fun setupAction() {
@@ -94,6 +95,59 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.modal ->{
+                    val checkedItems = booleanArrayOf(false, false, false, false, false)
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                    builder
+                        .setTitle("Pilih yang ingin ditampilkan")
+                        .setPositiveButton("Pilih") { dialog, which ->
+                            val saya = if (checkedItems[0]) 1 else null
+
+                            val lostorfound: String? = if(checkedItems[1]) {
+                                if(checkedItems[2]) {
+                                    null
+                                } else {
+                                    "lost"
+                                }
+                            } else {
+                                if(checkedItems[2]) {
+                                    "found"
+                                } else {
+                                    null
+                                }
+                            }
+
+                            val status: Int? = if(checkedItems[3]) {
+                                if(checkedItems[4]) {
+                                    null
+                                } else {
+                                    1
+                                }
+                            } else {
+                                if(checkedItems[4]) {
+                                    0
+                                } else {
+                                    null
+                                }
+                            }
+
+                            observeGetLostFounds(status, saya, lostorfound)
+                        }
+                        .setNegativeButton("Batal") { dialog, which ->
+                            // Do something else.
+                        }
+                        .setMultiChoiceItems(
+                            arrayOf("Saya", "Lost", "Found", "Completed", "Incompleted"), checkedItems) { dialog, which, isChecked ->
+                            checkedItems[which] = isChecked
+                        }
+
+//                        Log.d("CheckedItemsDump", "Checked items: ${checkedItems.contentToString()}")
+
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
+                    true
+                }
+
                 else -> false
             }
         }
@@ -106,13 +160,13 @@ class MainActivity : AppCompatActivity() {
             if (!user.isLogin) {
                 openLoginActivity()
             } else {
-                observeGetLostFounds()
+                observeGetLostFounds(null, null, null)
             }
         }
     }
 
-    private fun observeGetLostFounds() {
-        viewModel.getLostFounds().observe(this) { result ->
+    private fun observeGetLostFounds(isCompleted: Int?, isMe: Int?, status: String?) {
+        viewModel.getLostFounds(isCompleted, isMe, status).observe(this) { result ->
             if (result != null) {
                 when (result) {
                     is MyResult.Loading -> {
